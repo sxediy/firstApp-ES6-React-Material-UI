@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import Form from './Form';
 import DataStore from './DataStore';
 import AddUser from './AddUser.js';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import UsersList from './components/UsersList';
+import './App.css';
+
+const theme = createMuiTheme();
 
 /*
 import './App.css';
@@ -37,32 +43,30 @@ class App extends Component {
   }
   */
 
-  state = {
-    name: '',
-    age:''
-  };
+	state = {
+		users: [],
+	}
 
-  handleInputChange = event => {
-
-    this.setState(
-      {[event.target.name]: event.target.value},
-      () => console.log(this.state)
-    );
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const userName = this.state.name;
-    const userAge =  this.state.age;
-       
-    AddUser(event,userName,userAge);
+  handleSubmit = user => {
+		const { users } = this.state;
+		this.setState({
+			users: [...users, user],
+		}, () => console.log(this.state))
   }
 
   render() {
     return (
       <div className="App">
-         <Form onSubmit={this.handleSubmit} onChange={this.handleInputChange}/>
-
+				<MuiThemeProvider theme={theme}>
+					<Grid container>
+						<Grid item xs="12" sm="6">
+			        <Form onSubmit={this.handleSubmit} />
+						</Grid>
+						<Grid item xs="12" sm="6">
+							<UsersList users={this.state.users} />
+						</Grid>
+					</Grid>
+				</MuiThemeProvider>
       </div>
     );
   }
