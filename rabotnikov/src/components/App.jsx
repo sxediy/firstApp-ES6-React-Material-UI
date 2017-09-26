@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Form from './Form';
-import DataStore from './DataStore';
-import AddUser from './AddUser.js';
+
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import UsersList from './components/UsersList';
-import './App.css';
+import UsersList from './UsersList';
+import Toolbar from './Toolbar';
+import '.././App.css';
 
 const theme = createMuiTheme();
 
@@ -21,7 +21,6 @@ import './DeleteChecked.js';
 import './DeleteItem.js';
 import './EditItem1.js';
 import './EditItem2.js';
-import './ResetForm.js';
 import './SortByAge.js';
 import './SortByName.js';
 import './SortDirection.js';
@@ -31,28 +30,33 @@ import './ToggleItem.js';
 import './UnChecked.js';
 */
 class App extends Component {
- /* constructor(props){
-    super(props);
-    this.state = {
-      name: '',
-      age:''
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  */
 
 	state = {
 		users: [],
+		
+	
 	}
 
-  handleSubmit = user => {
+  handleSubmit = user => {   // добавление данных нового пользователя в массив
 		const { users } = this.state;
 		this.setState({
 			users: [...users, user],
-		}, () => console.log(this.state))
+    },
+  
+   () => console.log('текущий массив пользователей', users)
+	);
+	user.order = this.state.users.length;
+}
+	
+
+
+  updateData({ data }) {
+    this.setState({
+		users: data,
+		
+	});
   }
+
 
   render() {
     return (
@@ -64,8 +68,10 @@ class App extends Component {
 						</Grid>
 						<Grid item xs="12" sm="6">
 							<UsersList users={this.state.users} />
+						    <Toolbar data={this.state.users} update={this.updateData.bind(this)} />
 						</Grid>
 					</Grid>
+					
 				</MuiThemeProvider>
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import SortDirection from './SortDirection.js';
 import CreateSuffix from './CreateSuffix.js';
-import array from './DataStore';
+import users from './App';
 
 function EditItem2(event,userList) {                                  // Редактирование возраста пользователя.
 	const listItem = this.parentNode;                          
@@ -20,12 +20,12 @@ function EditItem2(event,userList) {                                  // Ред�
 			this.textContent = 'Изменить Возраст' ;
 
 			const index = [].indexOf.call(userList.querySelectorAll('.user-item'),listItem);
-	        array[index].age = editInput2.value;
+	        users[index].age = editInput2.value;
 
 	        CreateSuffix(title2.textContent,index);
-	        title2.textContent += ' ' + array[index].suffix;
+	        title2.textContent += ' ' + users[index].suffix;
 
-	        console.log( array );  
+	        console.log( users );  
 
 	        //SortDirection(buttonForNames, true);                                                         //спрятать треугольники направлений сортировки
 	        //SortDirection(buttonForAges, true);

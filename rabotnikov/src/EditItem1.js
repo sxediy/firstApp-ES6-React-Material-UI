@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import SortDirection from './SortDirection.js';
-import array from './DataStore';
+import users from './App';
 
 function EditItem1(event,userList) {                                      // Редактирование имени пользователя.                           
 	const listItem = this.parentNode;                            // 'li'.
@@ -17,10 +17,10 @@ function EditItem1(event,userList) {                                      // Р�
 		  this.textContent = 'Изменить Имя' ;
 
    		  const index = [].indexOf.call(userList.querySelectorAll('.user-item'),listItem);
-	      array[index].name = title1.textContent;
-	      console.log(`новое имя пользователя ${index} = ${array[index].name}`); 
+		  users[index].name = title1.textContent;
+	      console.log(`новое имя пользователя ${index} = ${users[index].name}`); 
 
-	      console.log( array ); 
+	      console.log( users ); 
 
 	      //SortDirection(buttonForNames, true);                                                         //спрятать треугольники направлений сортировки
 	      //SortDirection(buttonForAges, true);  

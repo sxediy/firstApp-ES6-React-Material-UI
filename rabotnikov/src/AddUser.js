@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import CreateSuffix from './CreateSuffix.js';
 import AddItem from './AddItem.js';
 //import './ResetForm.js';
-import array from './DataStore';
+import users from './App';
 
 
 const AddUser = (event, userName, userAge) => {  
 	event.preventDefault();                                                 // Чтобы страница не перезагрузилась.
-    const indexUser = array.length;                            // Индекс в масиве данных.
+    const indexUser = users.length;                            // Индекс в масиве данных.
     //DataStore( {name: userName, age: userAge});
                                                             
-    array.splice(indexUser,0,{name: userName, age: userAge}); // Добавление данные пользователя в массив.
+    
     CreateSuffix(userAge,indexUser);                          // Лет/год/года.
-    console.log('длина массива = ' + array.length);
+    console.log('длина массива = ' + users.length);
     console.log(event);
                                         
     AddItem(event,indexUser,userName,userAge);                                               // Процесс создания элемента в DOM c данными пользователя.

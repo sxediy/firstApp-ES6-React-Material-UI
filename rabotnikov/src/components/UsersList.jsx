@@ -2,6 +2,7 @@ import React from 'react';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Card, { CardContent, CardActions } from 'material-ui/Card';
 
+
 export default ({ users }) => (
 	<Card>
 		<CardContent>

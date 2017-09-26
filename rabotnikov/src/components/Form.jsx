@@ -7,54 +7,65 @@ const initialState = {
 	name: '',
 	age: '',
 	comment: '',
-	validationResults: {}
+	validationResults: {},
 }
 
-const validators = {
-	name: (value) => /^([а-яА-Яa-zA-Z]+)$/.test(value),
+const validators = {  // проверка валидности
+	name: (value) => /^[A-Z][a-z'-]*[a-z]+[IVX]?[IVX]?[I]{0,2}|[А-ЩЭЮЯЁ][а-яё'-]*[а-яё]+[IVX]?[IVX]?[I]{0,2}$/.test(value),
+  age: (value) => /^[0-9]{1,2}$/.test(value),
 }
 
-const isValid = (key, value) => validators[key](value);
+const isValid = (key, value) => validators[key](value);  // вызов функции проверки валидности
+console.log('isvalid'+ isValid)
 
 export default class Form extends Component {
 
 	state = {
-		...initialState
+		...initialState 
 	}
 
-	handleChange = key => event => {
+
+
+	handleChange = key => event => { //
     this.setState(
       {
-				[key]: event.target.value,
-				validationResults: {
+				[key]: event.target.value, // key - либо name, либо age      
+				validationResults: { // вместо concat. в начале validationResults: {} 
 					...this.state.validationResults,
-					[key]: isValid(key, event.target.value)
+					[key]: isValid(key, event.target.value), //результат проверки валидности хранится тут
+					
 				}
 			},
-      () => console.log(this.state)
+			() => console.log('this.state in Form',this.state),
+			console.log( [key] ,'isValid = '+ isValid(key, event.target.value)),
+			
     );
   }
 
-	onSubmit = () => {
-		this.props.onSubmit(this.state);
-		this.setState({
+	onSubmit = () => {  //кликом на Button вызовится эта ф-ция.
+   
+		this.props.onSubmit(this.state); // добавит в массив пользователя (см. App , функцию handleSubmit).
+		this.setState({    //вернет состояние в исходное(пустые поля данных пользователя).
 			...initialState,
 		});
+
 	}
 
-	render() {
+	render() {  // {onSubmit} ссылается на handleSubmit App через this.props,  handleSubmit добавит в массив данные нового пользователя (см. App , функцию handleSubmit).
 		const { onSubmit } = this.props;
 		const { validationResults } = this.state;
 		return(
-        <form  name='users' onSubmit={onSubmit}>
+        <form  name='users' onSubmit={onSubmit}>   
 					<Card>
 						<CardContent>
 							<div>
+						
 								<TextField
 									id="name"
 				          label="Имя"
 									placeholder="Имя"
 				          value={this.state.name}
+									required="true"
 				          onChange={this.handleChange('name')}
 				          margin="normal"
 									error={!validationResults.name}
@@ -70,7 +81,11 @@ export default class Form extends Component {
 									min="0"
 									max="117"
 				          value={this.state.age}
+									required="true"
 				          onChange={this.handleChange('age')}
+									margin="normal"
+									error={!validationResults.age}
+									
 				        />
 							</div>
 							<div>
@@ -84,7 +99,7 @@ export default class Form extends Component {
 							</div>
 						</CardContent>
 						<CardActions>
-							<Button raised color="primary" onClick={this.onSubmit}>Добавить</Button>
+							<Button raised color="primary" onClick={this.onSubmit}>Добавить</Button>  
 						</CardActions>
 					</Card>
 

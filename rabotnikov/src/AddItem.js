@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SortDirection.js';
 import CreateItem from  './CreateItem.js';
-import array from './DataStore';
+import users from './App';
 import CreateElement from './CreateElement.js';
 
 function AddItem(event,indexUser,userName,userAge) {                                            // Добавление данных нового пользователя.
@@ -9,7 +9,7 @@ function AddItem(event,indexUser,userName,userAge) {                            
 	
 	
 	const userList = CreateElement('ul', {className:'user-list'});                           // Контейнер элементов DOM. Элементами являются строки с данными пользователя.
-	const item = CreateItem(userName, userAge, array[indexUser].suffix, userList);
+	const item = CreateItem(userName, userAge, users[indexUser].suffix, userList);
 	userList.appendChild(item) ;
 	/*if(array.length>=2) {                                                      //активация кнопок сортировки
 		sortButtons.classList.remove('hideSortButtons');
