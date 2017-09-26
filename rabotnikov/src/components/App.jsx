@@ -39,6 +39,9 @@ class App extends Component {
 
   handleSubmit = user => {   // добавление данных нового пользователя в массив
 		const { users } = this.state;
+		//if (user.validationResults.age && user.validationResults.name) {
+		
+
 		this.setState({
 			users: [...users, user],
     },
@@ -46,7 +49,8 @@ class App extends Component {
    () => console.log('текущий массив пользователей', users)
 	);
 	user.order = this.state.users.length;
-}
+ }
+//}
 	
 
 
