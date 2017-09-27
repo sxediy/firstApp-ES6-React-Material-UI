@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Form from './Form';
-
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import UsersList from './UsersList';
-import Toolbar from './Toolbar';
+import Sort from './Sort';
 import '.././App.css';
 
 const theme = createMuiTheme();
@@ -72,7 +71,7 @@ class App extends Component {
 						</Grid>
 						<Grid item xs="12" sm="6">
 							<UsersList users={this.state.users} />
-						    <Toolbar data={this.state.users} update={this.updateData.bind(this)} />
+						    <Sort data={this.state.users} update={this.updateData.bind(this)} />
 						</Grid>
 					</Grid>
 					

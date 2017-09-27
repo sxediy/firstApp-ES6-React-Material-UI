@@ -12,7 +12,7 @@ const initialState = {
 
 const validators = {  // проверка валидности
 	name: (value) => /^[A-Z][a-z'-]*[a-z]+[IVX]?[IVX]?[I]{0,2}|[А-ЩЭЮЯЁ][а-яё'-]*[а-яё]+[IVX]?[IVX]?[I]{0,2}$/.test(value),
-  age: (value) => /^[0-9]{1,2}$/.test(value),
+  age: (value) => /^[1][0-1][0-9]$|^[0-9]{1,2}$/.test(value),
 }
 
 const isValid = (key, value) => validators[key](value);  // вызов функции проверки валидности, результат true/false
@@ -43,7 +43,7 @@ export default class Form extends Component {
   }
 
 	onSubmit = () => {  //кликом на Button вызовится эта ф-ция.
-   if(this.state.validationResults.name && this.state.validationResults.age) {
+   if(this.state.validationResults.name && this.state.validationResults.age) { // только валидные данные добавляются в массив и выводятся на страницу
 		this.props.onSubmit(this.state); // добавит в массив пользователя (см. App , функцию handleSubmit).
 		this.setState({    //вернет состояние в исходное(пустые поля данных пользователя).
 			...initialState,
@@ -64,8 +64,7 @@ export default class Form extends Component {
 									id="name"
 				          label="Имя"
 									placeholder="Имя"
-				          value={this.state.name}
-									required="true"
+				          value={this.state.name}validationResults
 				          onChange={this.handleChange('name')}
 				          margin="normal"
 									error={!validationResults.name}
