@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Toolbar from './Toolbar';
+import Toolbar2 from './Toolbar2';
 
 
 export default class Sort extends Component {
@@ -32,6 +33,7 @@ export default class Sort extends Component {
 
     this.sorted[type] = !isSorted;
     console.log('direction', direction); // проверка сортировки
+    console.log('this.props.data', this.props.data.length )
     
     update({
       data: sorted,
@@ -43,8 +45,16 @@ export default class Sort extends Component {
 
 
   render() {
+    let jsx = null;
+    if(this.props.data.length > 1 ) {
+      jsx = <Toolbar sort = {this.sort} />;
+    } else {
+      jsx = <div></div>
+    }
     return (
-     <Toolbar sort = {this.sort}/>
-    )
+      <div>
+     {jsx}
+      </div> 
+   );
   }
 }

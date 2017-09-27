@@ -48,6 +48,8 @@ class App extends Component {
    () => console.log('текущий массив пользователей', users)
 	);
 	user.order = this.state.users.length;
+	user.key = this.state.users.length;
+	console.log(`уникальный ключ у ${user.name}   ${user.key}`)
  }
 //}
 	

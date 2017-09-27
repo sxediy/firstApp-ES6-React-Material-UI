@@ -1,34 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
+import RaisedButton from 'material-ui/Button';
 
-
-
-export default class Toolbar2 extends Component {
-    constructor(props) {
-      super(props);
+export default ({ Toolbar2 }) => (
+  <Toolbar>
+    <ToolbarGroup>
+      <ToolbarTitle text="Сортировка" />
       
-    }
-
-render() {
-    return (
-      <Toolbar>
-        <ToolbarGroup>
-          <ToolbarTitle text="Options" />
-          <FontIcon className="muidocs-icon-custom-sort" />
-          <ToolbarSeparator />
-          <RaisedButton label=" Sort by name " primary={true} />
-          <RaisedButton label=" Sort by age " primary={true} />
-          <IconMenu
-            iconButtonElement={
-              <IconButton touch={true}>
-                <NavigationExpandMoreIcon />
-              </IconButton>
-            }
-          >
-            <MenuItem primaryText="Download" />
-            <MenuItem primaryText="More Info" />
-          </IconMenu>
-        </ToolbarGroup>
-      </Toolbar>
-    );
-  }
-}
+      <ToolbarSeparator />
+      <RaisedButton label="По имени"    onClick={ () => this.props.sort('name') }  primary={true} />
+      <RaisedButton label="По возрасту" onClick={ () => this.props.sort('age')  } primary={true} />
+      <RaisedButton label="Сброс"       onClick={ () => this.props.sort('order')} primary={true} />
+    </ToolbarGroup>
+  </Toolbar>
+  );
+  
